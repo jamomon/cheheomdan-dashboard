@@ -108,6 +108,8 @@
 
   /* ---------- quick notes ---------- */
   .stack{overflow:hidden}
+  .note a{color:var(--accent);text-decoration:none;font-weight:650}
+  .note a:hover{text-decoration:underline}
   .note{padding:16px 18px;border-top:1px solid var(--line-soft)}
   .note:first-child{border-top:0}
   .note-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}
@@ -265,7 +267,7 @@
     <h1>하모몬의 체험단 대시보드</h1>
     <p class="sub">리뷰노트 · 레뷰 · 디너의여왕 마이페이지 확인값 · 진행 중 / 진행 완료</p>
   </div>
-  <div class="asof">2026-11-18 기준</div>
+  <div class="asof">2026-11-19 기준</div>
 </header>
 
 <main class="wrap">
@@ -277,7 +279,7 @@
       <article class="card kpi">
         <p class="kpi-label">진행 중 캠페인</p>
         <p class="kpi-value">9<span>건</span></p>
-        <p class="kpi-foot">리뷰노트 <b>9건</b><br>리뷰 마감 <b>11/20 ~ 12/5</b></p>
+        <p class="kpi-foot">리뷰노트 <b>9건</b> · 미등록 <b>6</b> · 등록 완료 <b>3</b><br>리뷰 마감 <b>11/20 ~ 12/12</b></p>
       </article>
       <article class="card kpi">
         <p class="kpi-label">진행 중 혜택 가치</p>
@@ -296,12 +298,12 @@
       </article>
       <article class="card kpi kpi-wide">
         <p class="kpi-label">발표 대기 · 신청 중</p>
-        <p class="kpi-value">58<span>건</span></p>
+        <p class="kpi-value">59<span>건</span></p>
         <div class="chips">
           <span class="chip">리뷰노트 <b>28</b></span>
-          <span class="chip">레뷰 <b>27</b></span>
+          <span class="chip">레뷰 <b>28</b></span>
           <span class="chip">디너의여왕 <b>3</b></span>
-          <span class="chip">오늘 미선정 <b>1</b></span>
+          <span class="chip">디너의여왕 발표중 <b>1</b></span>
         </div>
       </article>
     </div>
@@ -328,38 +330,47 @@
 
         <div class="note">
           <div class="note-top">
-            <span class="badge b-danger">D-2</span>
+            <span class="badge b-danger">D-1</span>
             <strong>우규</strong>
-            <span class="where">리뷰노트 · 10만원 식사권</span>
+            <span class="where">리뷰노트 · 10만원 식사권 · #1504858</span>
           </div>
-          <p>11/20(금) 리뷰 마감. <b>당일 예약 불가</b>이고 방문은 <b>목요일 17~18시</b>까지만 가능해서 <b>오늘(11/18) 중 예약이 꼭 필요</b>해요.</p>
+          <p><b>11/20(금) 리뷰 마감</b>. 체험 기간이 11/4~11/20이고 방문은 <b>월·화·수·목·일 17:00~18:00</b>만, <b>당일 예약·방문 불가</b>예요. 금요일은 체험 불가라 <b>마지막 방문 가능일이 오늘(11/19 목)</b>인데 당일 예약은 안 돼서, <b>어제 예약해 두셨을 때만</b> 오늘 방문이 가능해요. 예약을 못 잡으셨다면 리뷰 등록 전에 매장(문자 예약)에 먼저 확인이 필요해요.</p>
         </div>
 
         <div class="note">
           <div class="note-top">
-            <span class="badge b-warning">11/20 방문</span>
+            <span class="badge b-danger">오늘 예약</span>
             <strong>무월식탁 코엑스 파르나스점</strong>
-            <span class="where">리뷰노트 · 약 6만원 상당</span>
+            <span class="where">리뷰노트 · 약 6만원 상당 · #1525208</span>
           </div>
-          <p>11/20(금) 방문 예정이고 리뷰 마감은 11/29(일). <b>최소 1일 전 예약 필수</b>라 <b>내일(11/19)까지 예약</b>을 마쳐야 해요.</p>
+          <p>11/20(금) 방문 예정, 리뷰 마감 11/29(일). 방문 가능 <b>월~일 11:00~20:00</b>이고 <b>최소 1일 전 예약 필수·당일 예약/방문 불가</b>라, <b>오늘(11/19) 예약해야 내일 방문</b>이 됩니다. 시간대를 정해 주시면 담당자에게 예약 문자를 넣어 둘게요.</p>
         </div>
 
         <div class="note">
           <div class="note-top">
             <span class="badge b-accent">신규 선정</span>
             <strong>올바른미테라피</strong>
-            <span class="where">리뷰노트 · 198,000원 상당</span>
+            <span class="where">리뷰노트 · 198,000원 상당 · #1535449</span>
           </div>
-          <p>리뷰 마감 <b>12/5(토)</b>. 체험은 <b>화~금 11~18시</b>이고 <b>당일 예약·방문 불가</b>, 여성 전용 1인샵이라 <b>방문 시간을 먼저 문의</b>해야 해요.</p>
+          <p>리뷰 마감 <b>12/5(토)</b>(D-16). 체험은 <b>화~금 11:00~18:00</b>이고 <b>당일 예약·방문 불가</b>, 여성 전용 1인샵이라 <b>방문 시간을 먼저 문의</b>해야 해요.</p>
         </div>
 
         <div class="note">
           <div class="note-top">
-            <span class="badge b-accent">확인 필요</span>
-            <strong>엠케이에스테틱</strong>
-            <span class="where">리뷰노트</span>
+            <span class="badge b-warning">D-6</span>
+            <strong>이편한 몸 수기 마사지</strong>
+            <span class="where">리뷰노트 · 11만원 바디튜닝 60분 · #1513263</span>
           </div>
-          <p>11/17 추가 선정 알림을 받았는데 사이트에서는 아직 <b>'취소' 탭에 남아 있어요</b>. 1:1 문의로 상태 확인이 필요합니다.</p>
+          <p><b>11/25(수) 리뷰 마감</b>이고 아직 리뷰 미등록이에요. 이번 주 안에 방문·촬영을 마치셔야 합니다.</p>
+        </div>
+
+        <div class="note">
+          <div class="note-top">
+            <span class="badge b-warning">확인 필요</span>
+            <strong>엠케이에스테틱</strong>
+            <span class="where">리뷰노트 · V라인 윤곽관리 · #1521350</span>
+          </div>
+          <p>11/17 추가 선정 알림을 받았는데 <b>오늘도 사이트에서는 '취소' 탭에만</b> 남아 있어요(진행 중 목록엔 없음). 1:1 문의로 상태 확인이 필요하고, 캠페인 체험기간은 11/13~11/26이라 <b>리뷰 마감 11/26(D-7)</b>이에요.</p>
         </div>
 
       </div>
@@ -383,63 +394,63 @@
               <td class="cell-name" data-label="캠페인"><span class="c-name">우규<span class="id">#1504858</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">10만원 식사권</td>
-              <td class="c-date" data-label="마감">11/20(금)<em>D-2</em></td>
-              <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span><span class="badge b-danger">예약 필요</span></td>
+              <td class="c-date" data-label="마감">11/20(금)<em>D-1</em></td>
+              <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span><span class="badge b-danger">방문 오늘까지</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">바 더스크 잠실방이점<span class="id">#1483216</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">8만원 상당</td>
-              <td class="c-date" data-label="마감">11/22(일)<em>D-4</em></td>
+              <td class="c-date" data-label="마감">11/22(일)<em>D-3</em></td>
               <td class="c-flag" data-label="상태"><span class="badge b-ok">등록 완료</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">이편한 몸 수기 마사지<span class="id">#1513263</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">11만원 바디튜닝 60분</td>
-              <td class="c-date" data-label="마감">11/25(수)<em>D-7</em></td>
+              <td class="c-date" data-label="마감">11/25(수)<em>D-6</em></td>
               <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">스페이스뷰티 신대방역점<span class="id">#1489715</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">20만원 90분 케어</td>
-              <td class="c-date" data-label="마감">11/27(금)<em>D-9</em></td>
-              <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
+              <td class="c-date" data-label="마감">11/27(금)<em>D-8</em></td>
+              <td class="c-flag" data-label="상태"><span class="badge b-ok">등록 완료</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">무월식탁 코엑스 파르나스점<span class="id">#1525208</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">약 6만원 상당</td>
-              <td class="c-date" data-label="마감">11/29(일)<em>D-11</em></td>
+              <td class="c-date" data-label="마감">11/29(일)<em>D-10</em></td>
               <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span><span class="badge b-danger">1일 전 예약</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">타파코파 용산본점<span class="id">#1504536</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">7만원 식사지원금</td>
-              <td class="c-date" data-label="마감">12/3(목)<em>D-15</em></td>
+              <td class="c-date" data-label="마감">12/3(목)<em>D-14</em></td>
               <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">올바른미테라피<span class="id">#1535449</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">198,000원 상당</td>
-              <td class="c-date" data-label="마감">12/5(토)<em>D-17</em></td>
+              <td class="c-date" data-label="마감">12/5(토)<em>D-16</em></td>
               <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span><span class="badge b-danger">예약 필요</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">아운뷰티 서래마을<span class="id">#1509172</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">20만원 시신경케어</td>
-              <td class="c-date" data-label="마감">12/6(일)<em>D-18 연장</em></td>
+              <td class="c-date" data-label="마감">12/6(일)<em>D-17 연장</em></td>
               <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
             </tr>
             <tr>
               <td class="cell-name" data-label="캠페인"><span class="c-name">더골드청담<span class="id">#1519784</span></span></td>
               <td data-label="플랫폼">리뷰노트</td>
               <td class="cell-benefit" data-label="혜택">청담스타관리<br><span style="font-size:12px;color:#78808d">금액 미기재</span></td>
-              <td class="c-date" data-label="마감">12/12(토)<em>D-24 연장</em></td>
+              <td class="c-date" data-label="마감">12/12(토)<em>D-23 연장</em></td>
               <td class="c-flag" data-label="상태"><span class="badge b-ok">등록 완료</span></td>
             </tr>
           </tbody>
@@ -447,13 +458,89 @@
       </div>
     </section>
 
+    <section>
+      <h2 class="sec-title">오늘의 추천 체험단 <span class="hint">11/19 확인 · 아직 신청하지 않은 캠페인</span></h2>
+
+      <div class="card stack">
+
+        <div class="note">
+          <div class="note-top">
+            <span class="badge b-accent">A · 7만원+ 서울 음식점</span>
+            <strong>쏘이313</strong>
+            <span class="where">리뷰노트 #1538538 · 서울 서초구 방배동</span>
+            <span class="badge b-warning">11/23 마감</span>
+          </div>
+          <p>2인 기준 <b>식사권 7만원 이상</b> · 체험 가능 <b>월~토 12:30~20:00</b>(평일 18시 이후·토요일 가능, 일요일 불가) · 당일 예약·방문 불가 · 지원 <b>183 / 모집 2</b> · 릴스 · 100,000P<br><a href="https://www.reviewnote.co.kr/campaigns/1538538" target="_blank" rel="noopener noreferrer">캠페인 보기</a></p>
+        </div>
+
+        <div class="note">
+          <div class="note-top">
+            <span class="badge b-accent">A · 7만원+ 서울 음식점</span>
+            <strong>쿠모다찌</strong>
+            <span class="where">리뷰노트 #1541882 · 서울 금천구 독산동</span>
+            <span class="badge b-warning">11/26 마감</span>
+          </div>
+          <p><b>10만원 자유이용권</b> · 체험 가능 <b>화~일 17:00~23:00</b>(평일 18시 이후·주말 가능, 월요일 불가) · 당일 예약·방문 불가 · 지원 <b>124 / 모집 2</b> · 릴스 · 100,000P<br><a href="https://www.reviewnote.co.kr/campaigns/1541882" target="_blank" rel="noopener noreferrer">캠페인 보기</a></p>
+        </div>
+
+        <div class="note">
+          <div class="note-top">
+            <span class="badge b-danger">A · 오늘 마감</span>
+            <strong>긴카</strong>
+            <span class="where">리뷰노트 #1536692 · 서울 중랑구 상봉동</span>
+          </div>
+          <p><b>10만원 식사권 + 100,000P</b> · 체험 가능 <b>월·화·수·목·일 17:30~21:00</b>(금·토·공휴일 불가) · 당일 예약·방문 불가 · 지원 <b>196 / 모집 1</b> · 릴스 · <b>신청 오늘(11/19)까지</b>, 발표 11/20, 체험 11/20~12/3<br><a href="https://www.reviewnote.co.kr/campaigns/1536692" target="_blank" rel="noopener noreferrer">캠페인 보기</a></p>
+        </div>
+
+        <div class="note">
+          <div class="note-top">
+            <span class="badge b-gray">A 참고 · 금액 미기재</span>
+            <strong>마담 주안상</strong>
+            <span class="where">리뷰노트 #1546409 · 서울 강서구 마곡동</span>
+            <span class="badge b-warning">11/28 마감</span>
+          </div>
+          <p>한식오마카세 <b>2인 + 전통주 하이볼 2잔</b>(원문에 금액 표기 없음 → 7만원 이상 확정 불가) · 체험 가능 <b>월~목 17:30~19:30</b> · 당일 예약·방문 불가 · 지원 <b>38 / 모집 5</b> · <b>블로그</b> · 15장·1,000자·지도·동영상<br><a href="https://www.reviewnote.co.kr/campaigns/1546409" target="_blank" rel="noopener noreferrer">캠페인 보기</a></p>
+        </div>
+
+      </div>
+
+      <div class="card stack" style="margin-top:12px">
+
+        <div class="note">
+          <div class="note-top">
+            <span class="badge b-accent">B · 서울 뷰티·케어</span>
+            <strong>유헤일로</strong>
+            <span class="where">리뷰노트 #1532059 · 서울 강남구 대치동</span>
+            <span class="badge b-danger">11/20 마감</span>
+          </div>
+          <p>시그니처 <b>윤곽 수기관리 90분(180,000원 상당)</b> · 체험 가능 <b>월·화·수·금·일 24시간 영업</b>·<b>당일 예약 가능</b> · 관리사 여 · 지원 <b>71 / 모집 1</b> · 릴스 · 50,000P<br><a href="https://www.reviewnote.co.kr/campaigns/1532059" target="_blank" rel="noopener noreferrer">캠페인 보기</a></p>
+        </div>
+
+        <div class="note">
+          <div class="note-top">
+            <span class="badge b-accent">B · 서울 뷰티·케어</span>
+            <strong>스물유 홍대상수점</strong>
+            <span class="where">리뷰노트 #1533242 · 서울 마포구 상수동</span>
+            <span class="badge b-warning">11/28 마감</span>
+          </div>
+          <p>헤어 <b>컷 + 세팅펌 또는 펌 14만~16만원</b> · 체험 가능 <b>화~일 10:00~17:00</b>(주말 가능, 월요일 불가) · 지원 <b>2 / 모집 8</b> · <b>블로그 + 클립</b> · 5,000P · 발표 11/29, 체험 11/29~12/12<br><a href="https://www.reviewnote.co.kr/campaigns/1533242" target="_blank" rel="noopener noreferrer">캠페인 보기</a></p>
+        </div>
+
+      </div>
+
+      <p class="foot-note">
+        <b>어제(11/18) 이미 안내한 건</b> — 12/5(토) 점심 후보: 레뷰 여의정 여의도 본점 · 리뷰노트 가헌생갈비 목동본점 · 월화식당 구로디지털단지역점 · 천수옥 · 목구 가로수길점 / 서대문~종로3가 저녁: 디너의여왕 코미도리 종각점 · 진향족발 74차 · 진양양꼬치 13차 · 고치비 23차 · 레뷰 루뽀 / 리뷰노트 온점 을지로점 · 명동한우정 · 레뷰 금결도야지. 뷰티는 리뷰노트 좋은하루 체형관리전문점 · 푸리파드마 스파 · 어나더핸드 · 레뷰 카카오풋앤바디 문정을 11/18 알림에서 안내했어요.<br>
+        <b>오늘 확인 결과</b> — 디너의여왕 신규 서울 음식점은 3만~4만원대·사카바온도(2인 66,000원)처럼 7만원 미달이거나 릴스·금액 미기재였고, 레뷰 지역 목록의 서울 음식점도 금액 미기재거나 7만원 미달이었어요. 뷰티는 셀앤비에스테틱(평일 11:00~16:30)·숲칼프 대방점(화~금 11:00~16:00)처럼 평일 18시 전에 끝나는 곳이 대부분이라 위 2건만 조건에 맞았습니다.
+      </p>
+    </section>
+
     <section data-filterable>
-      <h2 class="sec-title">발표 대기 · 신청 중 <span class="hint">총 58건</span></h2>
+      <h2 class="sec-title">발표 대기 · 신청 중 <span class="hint">총 59건</span></h2>
 
       <div class="tabs" role="tablist" aria-label="플랫폼 선택">
-        <button type="button" class="tab active" data-filter="all" role="tab" aria-selected="true">전체 <span>58</span></button>
+        <button type="button" class="tab active" data-filter="all" role="tab" aria-selected="true">전체 <span>59</span></button>
         <button type="button" class="tab" data-filter="reviewnote" role="tab" aria-selected="false">리뷰노트 <span>28</span></button>
-        <button type="button" class="tab" data-filter="revu" role="tab" aria-selected="false">레뷰 <span>27</span></button>
+        <button type="button" class="tab" data-filter="revu" role="tab" aria-selected="false">레뷰 <span>28</span></button>
         <button type="button" class="tab" data-filter="dinner" role="tab" aria-selected="false">디너의여왕 <span>3</span></button>
       </div>
 
@@ -466,27 +553,27 @@
         <ul class="list">
           <li>
             <div class="it-main"><span class="it-name">다바다</span></div>
-            <div class="it-side"><b>11/20</b> (D-2)</div>
+            <div class="it-side"><b>11/20</b> (D-1)</div>
           </li>
           <li>
             <div class="it-main"><span class="it-name">이안앤코 왁싱&amp;브로우 잠실점</span></div>
-            <div class="it-side"><b>11/21</b> (D-3)</div>
+            <div class="it-side"><b>11/21</b> (D-2)</div>
           </li>
           <li>
             <div class="it-main"><span class="it-name">브이안에스테틱&amp;왁싱</span></div>
-            <div class="it-side"><b>11/21</b> (D-3)</div>
+            <div class="it-side"><b>11/21</b> (D-2)</div>
           </li>
           <li>
             <div class="it-main"><span class="it-name">주라꿈터</span></div>
-            <div class="it-side"><b>11/22</b> (D-4)</div>
+            <div class="it-side"><b>11/22</b> (D-3)</div>
           </li>
           <li>
             <div class="it-main"><span class="it-name">테리크</span></div>
-            <div class="it-side"><b>11/23</b> (D-5)</div>
+            <div class="it-side"><b>11/23</b> (D-4)</div>
           </li>
           <li>
             <div class="it-main"><span class="it-name">한국베리팜</span></div>
-            <div class="it-side"><b>11/24</b> (D-6)</div>
+            <div class="it-side"><b>11/24</b> (D-5)</div>
           </li>
           <li class="it-more">
             <div class="it-main"><span class="it-name">그 외 22건</span></div>
@@ -499,9 +586,13 @@
       <div class="group card" data-platform-item="revu">
         <div class="group-head">
           <h3>레뷰</h3>
-          <span class="count"><b>27</b>건 신청 중 · 발표 대기</span>
+          <span class="count"><b>28</b>건 신청 중 · 발표 대기</span>
         </div>
         <ul class="list">
+          <li>
+            <div class="it-main"><span class="it-name">르플리셔스파웰니스룸 서초점</span><span class="badge b-accent">선정중</span></div>
+            <div class="it-side">바디·페이셜</div>
+          </li>
           <li>
             <div class="it-main"><span class="it-name">닥터스칼프 강남본점</span></div>
             <div class="it-side">발표 대기</div>
@@ -520,7 +611,7 @@
           </li>
           <li class="it-more">
             <div class="it-main"><span class="it-name">그 외 23건</span></div>
-            <div class="it-side">합계 27건</div>
+            <div class="it-side">합계 28건</div>
           </li>
         </ul>
       </div>
@@ -529,11 +620,11 @@
       <div class="group card" data-platform-item="dinner">
         <div class="group-head">
           <h3>디너의여왕</h3>
-          <span class="count"><b>3</b>건 신청 중 · 미선정 1건</span>
+          <span class="count"><b>3</b>건 신청 중 · 오늘 발표중 1</span>
         </div>
         <ul class="list">
           <li>
-            <div class="it-main"><span class="it-name">제주은희네해장국 밀키트</span></div>
+            <div class="it-main"><span class="it-name">제주은희네해장국 밀키트</span><span class="badge b-warning">발표중</span></div>
             <div class="it-side"><b>11/19</b> 발표</div>
           </li>
           <li>
@@ -752,7 +843,7 @@
   </div>
 
   <footer>
-    <p>2026-11-18 22시 기준 · 리뷰노트 · 레뷰 · 디너의여왕 마이페이지에서 직접 확인한 값으로 정리했습니다.</p>
+    <p>2026-11-19 06시 기준 · 리뷰노트 · 레뷰 · 디너의여왕 마이페이지에서 직접 확인한 값으로 정리했습니다.</p>
     <p>플랫폼 사정에 따라 마감일·발표일이 바뀔 수 있어요. 마감이 임박한 건은 신청·등록 전에 사이트에서 한 번 더 확인하는 게 좋습니다.</p>
   </footer>
 
