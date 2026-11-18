@@ -311,7 +311,7 @@
   </div>
 
   <!-- ── 진행 중 ────────────────────────────────────────────── -->
-  <div data-view="active">
+  <div data-view-panel="active">
 
     <section>
       <h2 class="sec-title">이번 주 꼭 챙길 것</h2>
@@ -546,7 +546,7 @@
   </div>
 
   <!-- ── 진행 완료 ──────────────────────────────────────────── -->
-  <div data-view="done" class="is-hidden">
+  <div data-view-panel="done" class="is-hidden">
 
     <section>
       <h2 class="sec-title">완료 혜택 요약 <span class="hint">금액 확인분 + 포인트</span></h2>
@@ -753,7 +753,7 @@
   (function () {
     // 진행 중 / 진행 완료 전환
     var vtabs = Array.prototype.slice.call(document.querySelectorAll('.viewtabs .vtab'));
-    var views = Array.prototype.slice.call(document.querySelectorAll('[data-view]'));
+    var views = Array.prototype.slice.call(document.querySelectorAll('[data-view-panel]'));
 
     vtabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
@@ -765,7 +765,7 @@
         tab.classList.add('active');
         tab.setAttribute('aria-selected', 'true');
         views.forEach(function (v) {
-          v.classList.toggle('is-hidden', v.getAttribute('data-view') !== target);
+          v.classList.toggle('is-hidden', v.getAttribute('data-view-panel') !== target);
         });
       });
     });
