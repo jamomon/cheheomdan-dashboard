@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>하모몬의 체험단 대시보드</title>
+<style>
+  :root{
+    --ink:#111318;
+    --ink-soft:#3f4550;
+    --muted:#78808d;
+    --line:#e8eaef;
+    --line-soft:#f1f3f6;
+    --accent:#2b6cf6;
+    --accent-soft:#eef3ff;
+    --green:#0b8a54;
+    --green-soft:#e8f7ef;
+    --amber:#a8630a;
+    --amber-soft:#fdf3e3;
+    --red:#c2331f;
+    --red-soft:#fdeeeb;
+    --gray-soft:#f4f5f7;
+    --radius:16px;
+    --shadow:0 1px 2px rgba(17,19,24,.04), 0 6px 20px -12px rgba(17,19,24,.12);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:#fff;
+    color:var(--ink);
+    font-family:"Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Segoe UI",Roboto,sans-serif;
+    font-size:15px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{width:100%;max-width:980px;margin:0 auto;padding:0 20px}
+  @media (max-width:480px){.wrap{padding:0 16px}}
+
+  /* ---------- header ---------- */
+  .head{
+    display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;
+    padding-top:40px;padding-bottom:22px;
+  }
+  .eyebrow{
+    margin:0 0 6px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);font-weight:700;
+  }
+  h1{margin:0;font-size:27px;line-height:1.25;letter-spacing:-.02em;font-weight:800}
+  .sub{margin:7px 0 0;color:var(--muted);font-size:13px}
+  .asof{
+    flex:none;font-size:12.5px;font-weight:650;color:var(--ink-soft);
+    background:var(--gray-soft);border:1px solid var(--line);
+    padding:7px 12px;border-radius:999px;white-space:nowrap;
+  }
+
+  /* ---------- sections ---------- */
+  section{margin:0 0 34px}
+  .sec-title{
+    display:flex;align-items:baseline;gap:9px;
+    margin:0 0 13px;font-size:14px;font-weight:750;letter-spacing:-.01em;
+  }
+  .sec-title .hint{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+
+  /* ---------- KPI ---------- */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  @media (max-width:760px){.kpi-grid{grid-template-columns:1fr}}
+  .kpi{padding:18px 18px 16px}
+  .kpi-label{
+    margin:0 0 8px;font-size:12.5px;font-weight:650;color:var(--muted);
+    display:flex;align-items:center;gap:6px;
+  }
+  .kpi-value{margin:0;font-size:31px;line-height:1.1;font-weight:800;letter-spacing:-.03em}
+  .kpi-value span{font-size:15px;font-weight:700;margin-left:3px;letter-spacing:0;color:var(--ink-soft)}
+  .kpi-foot{margin:10px 0 0;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line-soft);padding-top:10px}
+  .kpi-foot b{color:var(--ink-soft);font-weight:650}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;vertical-align:1px}
+
+  /* ---------- quick notes ---------- */
+  .stack{overflow:hidden}
+  .note{padding:16px 18px;border-top:1px solid var(--line-soft)}
+  .note:first-child{border-top:0}
+  .note-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}
+  .note-top strong{font-size:14.5px;font-weight:750;letter-spacing:-.01em}
+  .note-top .where{font-size:12.5px;color:var(--muted)}
+  .note p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  .note p b{color:var(--ink);font-weight:700}
+
+  /* ---------- badges ---------- */
+  .badge{
+    display:inline-block;flex:none;
+    font-size:11.5px;font-weight:750;line-height:1.5;
+    padding:2px 8px;border-radius:999px;white-space:nowrap;
+  }
+  .b-danger{background:var(--red-soft);color:var(--red)}
+  .b-warning{background:var(--amber-soft);color:var(--amber)}
+  .b-ok{background:var(--green-soft);color:var(--green)}
+  .b-accent{background:var(--accent-soft);color:var(--accent)}
+  .b-gray{background:var(--gray-soft);color:var(--ink-soft)}
+  .b-today{background:var(--red);color:#fff}
+
+  /* ---------- table ---------- */
+  .tbl-card{padding:4px 6px}
+  table{width:100%;border-collapse:collapse}
+  thead th{
+    text-align:left;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);font-weight:700;padding:12px 12px 10px;border-bottom:1px solid var(--line);
+  }
+  tbody td{
+    padding:13px 12px;border-bottom:1px solid var(--line-soft);
+    font-size:13.5px;color:var(--ink-soft);vertical-align:middle;
+  }
+  tbody tr:last-child td{border-bottom:0}
+  .c-name{font-weight:700;color:var(--ink);font-size:14px;letter-spacing:-.01em}
+  .c-name .id{display:block;font-size:11.5px;font-weight:500;color:var(--muted);margin-top:2px;letter-spacing:0}
+  .c-dd{white-space:nowrap;font-variant-numeric:tabular-nums}
+  .c-date{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+  .c-date em{font-style:normal;color:var(--muted);font-size:12px;margin-left:3px}
+  .c-flag{display:flex;flex-wrap:wrap;gap:5px}
+  .col-platform{width:96px}
+  .col-benefit{width:24%}
+  .col-due{width:150px}
+  .col-state{width:132px}
+
+  @media (max-width:760px){
+    .tbl-card{padding:2px 14px}
+    table,tbody,tr,td{display:block;width:100%}
+    thead{display:none}
+    tbody tr{padding:14px 0;border-bottom:1px solid var(--line)}
+    tbody tr:last-child{border-bottom:0}
+    tbody td{border:0;padding:2px 0;display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+    tbody td::before{
+      content:attr(data-label);flex:none;font-size:12px;font-weight:650;color:var(--muted);
+    }
+    tbody td.cell-name{display:block;margin-bottom:7px}
+    tbody td.cell-name::before{display:none}
+    .c-flag{justify-content:flex-end}
+    .c-name{font-size:14.5px}
+  }
+
+  /* ---------- tabs ---------- */
+  .tabs{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 13px}
+  .tab{
+    appearance:none;font:inherit;cursor:pointer;
+    background:#fff;border:1px solid var(--line);color:var(--ink-soft);
+    font-size:12.5px;font-weight:650;padding:7px 12px;border-radius:999px;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .tab span{color:var(--muted);font-weight:600;margin-left:4px;font-variant-numeric:tabular-nums}
+  .tab:hover{border-color:#d7dbe3}
+  .tab.active{background:var(--ink);border-color:var(--ink);color:#fff}
+  .tab.active span{color:rgba(255,255,255,.66)}
+
+  /* ---------- groups / lists ---------- */
+  .group{margin:0 0 12px;padding:0}
+  .group-head{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:14px 18px;border-bottom:1px solid var(--line-soft);
+  }
+  .group-head h3{margin:0;font-size:13.5px;font-weight:750;letter-spacing:-.01em}
+  .group-head .count{font-size:12px;color:var(--muted);font-weight:600}
+  .group-head .count b{color:var(--ink-soft);font-weight:750}
+  ul.list{list-style:none;margin:0;padding:2px 18px 6px}
+  ul.list li{
+    display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+    padding:10px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px;
+  }
+  ul.list li:last-child{border-bottom:0}
+  .it-main{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-width:0}
+  .it-name{font-weight:650;color:var(--ink);letter-spacing:-.01em}
+  .it-side{flex:none;color:var(--muted);font-size:12.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .it-side b{color:var(--ink-soft);font-weight:700}
+  li.it-more{color:var(--muted);font-style:normal}
+  li.it-more .it-name{font-weight:600;color:var(--ink-soft)}
+
+  /* ---------- recent / footer ---------- */
+  .recent{padding:15px 18px}
+  .recent li{display:flex;justify-content:space-between;gap:14px;padding:7px 0;font-size:13.5px;list-style:none}
+  .recent ul{margin:0;padding:0}
+  .recent .it-side{color:var(--muted);font-size:12.5px;white-space:nowrap}
+  footer{
+    border-top:1px solid var(--line);margin-top:8px;padding:20px 0 44px;
+    color:var(--muted);font-size:12px;line-height:1.7;
+  }
+  footer p{margin:0 0 4px}
+  @media print{
+    body{font-size:12px} .asof{border:1px solid #ccc}
+    .card{box-shadow:none} section{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap head">
+  <div>
+    <p class="eyebrow">Campaign Tracker</p>
+    <h1>하모몬의 체험단 대시보드</h1>
+    <p class="sub">리뷰노트 · 레뷰 · 디너의여왕 마이페이지 확인값</p>
+  </div>
+  <div class="asof">2026-11-18 기준</div>
+</header>
+
+<main class="wrap">
+
+  <!-- ── Overview ───────────────────────────────────────────── -->
+  <section>
+    <h2 class="sec-title">Overview</h2>
+    <div class="kpi-grid">
+      <article class="card kpi">
+        <p class="kpi-label">당첨 · 진행 중</p>
+        <p class="kpi-value">8<span>건</span></p>
+        <p class="kpi-foot">미등록 <b>6건</b> · 등록 완료 <b>2건</b></p>
+      </article>
+      <article class="card kpi">
+        <p class="kpi-label">진행 중 혜택 가치</p>
+        <p class="kpi-value">820,000<span>원+</span></p>
+        <p class="kpi-foot">7건 합산 · 더골드청담 5,000P 별도</p>
+      </article>
+      <article class="card kpi">
+        <p class="kpi-label">발표 대기 · 신청 중</p>
+        <p class="kpi-value">58<span>건</span></p>
+        <p class="kpi-foot">리뷰노트 <b>28</b> · 레뷰 <b>26</b> · 디너의여왕 <b>4</b></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── 이번 주 꼭 챙길 것 ──────────────────────────────────── -->
+  <section>
+    <h2 class="sec-title">이번 주 꼭 챙길 것</h2>
+    <div class="card stack">
+
+      <div class="note">
+        <div class="note-top">
+          <span class="badge b-danger">D-2</span>
+          <strong>우규</strong>
+          <span class="where">리뷰노트 · 10만원 식사권</span>
+        </div>
+        <p>11/20(금) 리뷰 마감. <b>당일 예약 불가</b>이고 방문은 <b>목요일 17~18시</b>까지만 가능해서 <b>오늘(11/18) 중 예약이 꼭 필요</b>해요.</p>
+      </div>
+
+      <div class="note">
+        <div class="note-top">
+          <span class="badge b-warning">11/20 방문</span>
+          <strong>무월식탁 코엑스 파르나스점</strong>
+          <span class="where">리뷰노트 · 약 6만원 상당</span>
+        </div>
+        <p>11/20(금) 방문 예정이고 리뷰 마감은 11/29(일). <b>최소 1일 전 예약 필수</b>라 <b>내일(11/19)까지 예약</b>을 마쳐야 해요.</p>
+      </div>
+
+      <div class="note">
+        <div class="note-top">
+          <span class="badge b-accent">확인 필요</span>
+          <strong>엠케이에스테틱</strong>
+          <span class="where">리뷰노트</span>
+        </div>
+        <p>11/17 추가 선정 알림을 받았는데 사이트에서는 아직 <b>'취소' 탭에 남아 있어요</b>. 1:1 문의로 상태 확인이 필요합니다.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 당첨 캠페인 ───────────────────────────────────────── -->
+  <section>
+    <h2 class="sec-title">당첨 캠페인 <span class="hint">마감 빠른 순 · 8건</span></h2>
+    <div class="card tbl-card">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-name">캠페인</th>
+            <th class="col-platform">플랫폼</th>
+            <th class="col-benefit">혜택</th>
+            <th class="col-due">마감</th>
+            <th class="col-state">상태</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">우규<span class="id">#1504858</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">10만원 식사권</td>
+            <td class="c-date" data-label="마감">11/20(금)<em>D-2</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span><span class="badge b-danger">예약 필요</span></td>
+          </tr>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">바 더스크 잠실방이점<span class="id">#1483216</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">8만원 상당</td>
+            <td class="c-date" data-label="마감">11/22(일)<em>D-4</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-ok">등록 완료</span></td>
+          </tr>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">이편한 몸 수기 마사지<span class="id">#1513263</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">11만원 바디튜닝 60분</td>
+            <td class="c-date" data-label="마감">11/25(수)<em>D-7</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
+          </tr>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">스페이스뷰티 신대방역점<span class="id">#1489715</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">20만원 90분 케어</td>
+            <td class="c-date" data-label="마감">11/27(금)<em>D-9</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
+          </tr>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">무월식탁 코엑스 파르나스점<span class="id">#1525208</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">약 6만원 상당</td>
+            <td class="c-date" data-label="마감">11/29(일)<em>D-11</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span><span class="badge b-danger">1일 전 예약</span></td>
+          </tr>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">타파코파 용산본점<span class="id">#1504536</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">7만원 식사지원금</td>
+            <td class="c-date" data-label="마감">12/3(목)<em>D-15</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
+          </tr>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">아운뷰티 서래마을<span class="id">#1509172</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">20만원 시신경케어</td>
+            <td class="c-date" data-label="마감">12/6(일)<em>D-18 연장</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-warning">미등록</span></td>
+          </tr>
+          <tr>
+            <td class="cell-name" data-label="캠페인"><span class="c-name">더골드청담<span class="id">#1519784</span></span></td>
+            <td data-label="플랫폼">리뷰노트</td>
+            <td data-label="혜택">5,000P</td>
+            <td class="c-date" data-label="마감">12/12(토)<em>D-24 연장</em></td>
+            <td class="c-flag" data-label="상태"><span class="badge b-ok">등록 완료</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── 발표 대기 ─────────────────────────────────────────── -->
+  <section>
+    <h2 class="sec-title">발표 대기 · 신청 중 <span class="hint">총 58건</span></h2>
+
+    <div class="tabs" role="tablist" aria-label="플랫폼 선택">
+      <button type="button" class="tab active" data-filter="all" role="tab" aria-selected="true">전체 <span>58</span></button>
+      <button type="button" class="tab" data-filter="reviewnote" role="tab" aria-selected="false">리뷰노트 <span>28</span></button>
+      <button type="button" class="tab" data-filter="revu" role="tab" aria-selected="false">레뷰 <span>26</span></button>
+      <button type="button" class="tab" data-filter="dinner" role="tab" aria-selected="false">디너의여왕 <span>4</span></button>
+    </div>
+
+    <!-- 리뷰노트 -->
+    <div class="group card" data-platform="reviewnote">
+      <div class="group-head">
+        <h3>리뷰노트</h3>
+        <span class="count"><b>28</b>건 신청 중</span>
+      </div>
+      <ul class="list">
+        <li>
+          <div class="it-main"><span class="it-name">로이에스테틱 마포본점</span><span class="badge b-today">오늘 마감</span></div>
+          <div class="it-side"><b>11/18</b> (D-0)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">다바다</span></div>
+          <div class="it-side"><b>11/20</b> (D-2)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">브이안에스테틱</span></div>
+          <div class="it-side"><b>11/21</b> (D-3)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">스파올린</span></div>
+          <div class="it-side"><b>11/21</b> (D-3)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">올바른미테라피</span></div>
+          <div class="it-side"><b>11/21</b> (D-3)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">올리니끄</span></div>
+          <div class="it-side"><b>11/21</b> (D-3)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">송리단양조장</span></div>
+          <div class="it-side"><b>11/21</b> (D-3)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">이안앤코</span></div>
+          <div class="it-side"><b>11/21</b> (D-3)</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">박준뷰티랩 성수점</span></div>
+          <div class="it-side">마감일 확인 필요</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">준오헤어 강남역4호점</span></div>
+          <div class="it-side">마감일 확인 필요</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">다엘헤어</span></div>
+          <div class="it-side">마감일 확인 필요</div>
+        </li>
+        <li class="it-more">
+          <div class="it-main"><span class="it-name">그 외 17건</span></div>
+          <div class="it-side">합계 28건</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 레뷰 -->
+    <div class="group card" data-platform="revu">
+      <div class="group-head">
+        <h3>레뷰</h3>
+        <span class="count"><b>26</b>건 신청 중 · 선정중 4건</span>
+      </div>
+      <ul class="list">
+        <li>
+          <div class="it-main"><span class="it-name">아로퓸 캡슐세제</span><span class="badge b-accent">선정중</span></div>
+          <div class="it-side">발표 대기</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">아로퓸 향기부스터</span><span class="badge b-accent">선정중</span></div>
+          <div class="it-side">발표 대기</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">고릴라랩 향기부스터</span><span class="badge b-accent">선정중</span></div>
+          <div class="it-side">발표 대기</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">바리바디 마사지스틱</span><span class="badge b-accent">선정중</span></div>
+          <div class="it-side">발표 대기</div>
+        </li>
+        <li class="it-more">
+          <div class="it-main"><span class="it-name">그 외 22건</span></div>
+          <div class="it-side">합계 26건</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 디너의여왕 -->
+    <div class="group card" data-platform="dinner">
+      <div class="group-head">
+        <h3>디너의여왕</h3>
+        <span class="count"><b>4</b>건 신청 중</span>
+      </div>
+      <ul class="list">
+        <li>
+          <div class="it-main"><span class="it-name">폴 바셋 오덴세 드립백</span><span class="badge b-today">오늘 발표</span></div>
+          <div class="it-side"><b>11/18</b></div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">제주은희네해장국 밀키트</span></div>
+          <div class="it-side"><b>11/19</b> 발표</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">글렌로티스 싱글몰트 위스키</span></div>
+          <div class="it-side"><b>11/20</b> 발표</div>
+        </li>
+        <li>
+          <div class="it-main"><span class="it-name">아실리아 청담점</span></div>
+          <div class="it-side"><b>11/23</b> 발표</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 최근 마무리 ───────────────────────────────────────── -->
+  <section>
+    <h2 class="sec-title">최근 마무리</h2>
+    <div class="card recent">
+      <ul>
+        <li><span>오브제바이쿤달 디퓨저 · 레뷰</span><span class="it-side">11/17 등록 완료</span></li>
+        <li><span>이온스칼프 · 리뷰노트</span><span class="it-side">11/16 등록 완료</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>2026-11-18 기준 · 리뷰노트 · 레뷰 · 디너의여왕 마이페이지 확인값으로 정리했습니다.</p>
+    <p>플랫폼 사정에 따라 마감일·발표일이 바뀔 수 있어요. 마감이 임박한 건은 신청·등록 전에 사이트에서 한 번 더 확인하는 게 좋습니다.</p>
+  </footer>
+
+</main>
+
+<script>
+  (function () {
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.group'));
+
+    function select(filter) {
+      groups.forEach(function (g) {
+        g.hidden = !(filter === 'all' || g.getAttribute('data-platform') === filter);
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        select(tab.getAttribute('data-filter'));
+      });
+    });
+  })();
+</script>
+</body>
+</html>
