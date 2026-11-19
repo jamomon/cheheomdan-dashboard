@@ -2,7 +2,8 @@
 <!--
   유지보수 메모 (매일 아침 갱신용)
   - KPI: .kpi-grid > article.kpi 4개(진행 중 건수·진행 중 혜택·진행 완료 건수·완료 혜택) + .kpi-wide(발표 대기)
-  - 화면 전환: .viewtabs .vtab[data-view="active|done"] ↔ div[data-view-panel="active|done"]
+  - 화면 전환: .viewtabs .vtab[data-view="active|done|trend"] ↔ div[data-view-panel="active|done|trend"]
+  - 블로그 트렌드 탭: div[data-view-panel="trend"] 안에서만 수정. 날짜·키워드는 확인된 사실만 넣고 미확인 일정은 '예상' 배지로 표기
   - 플랫폼 필터: section[data-filterable] 안의 .tab[data-filter] 가 [data-platform-item] 요소를 숨김/표시
   - 진행 완료 표의 각 행은 <tr data-platform-item="reviewnote|revu|dinner">
   - 금액이 사이트에 없으면 '금액 미기재'로 표기하고 합계에서 제외할 것
@@ -188,9 +189,10 @@
 
   /* ---------- view switch ---------- */
   .viewtabs{
-    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;
+    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
     margin:0 0 26px;
   }
+  @media (max-width:760px){.viewtabs{grid-template-columns:1fr}}
   .vtab{
     appearance:none;font:inherit;cursor:pointer;text-align:left;
     display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -245,6 +247,55 @@
   .srow.total .sl{font-weight:800}
   .foot-note{margin:12px 0 0;font-size:12px;line-height:1.65;color:var(--muted)}
   .foot-note b{color:var(--ink-soft);font-weight:650}
+
+  /* ---------- blog trend ---------- */
+  .tr-picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  @media (max-width:900px){.tr-picks{grid-template-columns:1fr}}
+  .tr-pick{padding:16px 17px;display:flex;flex-direction:column;gap:8px}
+  .tr-pick-top{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
+  .tr-no{font-size:11px;font-weight:800;letter-spacing:.08em;color:#fff;background:var(--ink);padding:3px 8px;border-radius:999px}
+  .tr-pick h3{margin:2px 0 0;font-size:15.5px;line-height:1.35;font-weight:800;letter-spacing:-.02em}
+  .tr-pick p{margin:0;font-size:12.8px;line-height:1.62;color:var(--ink-soft)}
+  .tr-pick p b{color:var(--ink);font-weight:700}
+  .tr-ex{margin:auto 0 0;font-size:12.5px;font-weight:650;line-height:1.5;color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:9px 11px}
+  .tr-ex span{display:block;font-size:10.5px;font-weight:750;letter-spacing:.06em;color:var(--muted);margin-bottom:3px}
+
+  .kw-wrap{line-height:2.05}
+  .kw{display:inline-block;font-size:11.8px;font-weight:700;padding:3px 8px;border-radius:8px;margin:0 4px 4px 0}
+  .kw-main{background:var(--ink);color:#fff;font-size:12px}
+  .kw-sub{background:#fff;border:1px solid var(--line);color:var(--ink-soft);font-weight:600}
+
+  .tr-card{margin:0 0 11px;overflow:hidden}
+  .tr-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:13px 18px;border-bottom:1px solid var(--line-soft)}
+  .tr-when{display:flex;align-items:baseline;gap:5px;flex:none}
+  .tr-day{font-size:18px;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .tr-dow{font-size:11.5px;font-weight:700;color:var(--muted)}
+  .tr-head .tr-sub{font-size:12.5px;color:var(--muted);font-weight:600}
+  .tr-body{padding:2px 18px 6px}
+  .tr-row{display:flex;gap:14px;padding:10px 0;border-top:1px solid var(--line-soft);font-size:13.2px;line-height:1.62}
+  .tr-row:first-child{border-top:0}
+  .tr-label{flex:none;width:72px;font-size:11.5px;font-weight:750;color:var(--muted);letter-spacing:.01em;padding-top:2px}
+  .tr-val{flex:1;min-width:0;color:var(--ink-soft)}
+  .tr-val b{color:var(--ink);font-weight:700}
+  @media (max-width:600px){
+    .tr-body{padding:0 15px 4px}
+    .tr-head{padding:12px 15px}
+    .tr-row{display:block;padding:10px 0}
+    .tr-label{width:auto;display:block;margin-bottom:4px;font-size:11px}
+  }
+
+  .guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  @media (max-width:760px){.guide-grid{grid-template-columns:1fr}}
+  .guide{padding:15px 17px}
+  .guide h3{margin:0 0 6px;font-size:13.5px;font-weight:750;display:flex;flex-wrap:wrap;align-items:center;gap:7px;letter-spacing:-.01em}
+  .guide p{margin:0;font-size:12.8px;line-height:1.65;color:var(--ink-soft)}
+  .guide p b{color:var(--ink);font-weight:700}
+  .guide ol{margin:6px 0 0;padding-left:17px;font-size:12.8px;line-height:1.7;color:var(--ink-soft)}
+  .guide ol b{color:var(--ink)}
+  .src-list{margin:0;padding:0 18px 8px;list-style:none;font-size:12.3px;line-height:1.7;color:var(--muted)}
+  .src-list li{padding:8px 0;border-bottom:1px solid var(--line-soft)}
+  .src-list li:last-child{border-bottom:0}
+  .src-list b{color:var(--ink-soft);font-weight:650}
 
   /* ---------- footer ---------- */
   footer{
@@ -318,6 +369,10 @@
     <button type="button" class="vtab" data-view="done" role="tab" aria-selected="false">
       <span class="vt-main"><span class="dot" style="background:#0b8a54"></span>진행 완료</span>
       <span class="vt-num">22</span>
+    </button>
+    <button type="button" class="vtab" data-view="trend" role="tab" aria-selected="false">
+      <span class="vt-main"><span class="dot" style="background:#c2331f"></span>🔥 블로그 트렌드</span>
+      <span class="vt-num" style="font-size:13px;letter-spacing:.04em">TOP 3</span>
     </button>
   </div>
 
@@ -842,9 +897,300 @@
 
   </div>
 
+  <!-- ── 블로그 트렌드 ──────────────────────────────────────── -->
+  <div data-view-panel="trend" class="is-hidden">
+
+    <section>
+      <h2 class="sec-title">오늘(11/19) 바로 쓰면 터지는 TOP 3 글감 <span class="hint">2026-11-19 21시 확인</span></h2>
+
+      <div class="tr-picks">
+
+        <article class="card tr-pick">
+          <div class="tr-pick-top">
+            <span class="tr-no">TOP 1</span>
+            <span class="badge b-today">오늘 개막</span>
+          </div>
+          <h3>잠실 롯데타운 크리스마스 마켓</h3>
+          <p>오늘(11/19) 개막해서 <b>2027년 1월 3일</b>까지. 19세기 영국 크리스마스 시장 콘셉트에 <b>17m 시계탑·회전목마</b>가 세워지고, <b>18시부터 매시 정각</b> '크리스마스 타임 쇼'가 열려요. 입장 사전예약은 무료이고 1차가 이미 열렸으며 2차는 <b>11/20</b>로 보도됐어요(공식 공지 확인 필요).</p>
+          <div class="kw-wrap">
+            <span class="kw kw-main">잠실 크리스마스 마켓</span>
+            <span class="kw kw-sub">롯데타운 크리스마스 마켓 예약</span>
+            <span class="kw kw-sub">크리스마스 마켓 입장권</span>
+            <span class="kw kw-sub">잠실 데이트 코스</span>
+            <span class="kw kw-sub">석촌호수 겨울</span>
+          </div>
+          <p class="tr-ex"><span>제목 예시</span>잠실 크리스마스 마켓 다녀왔어요🎄 예약·입장·타임쇼 3줄 정리</p>
+          <p><b>공략</b> 개막 당일인 <b>오늘 밤</b> 발행이 가장 세요. 내일 아침 '예약 방법' 문단만 보강해 업데이트하면 이틀치 검색을 다 받습니다. 사진은 시계탑·회전목마·야간 점등 3장 이상.</p>
+        </article>
+
+        <article class="card tr-pick">
+          <div class="tr-pick-top">
+            <span class="tr-no">TOP 2</span>
+            <span class="badge b-today">오늘 첫날</span>
+          </div>
+          <h3>스타벅스 × 헬로키티 크리스마스</h3>
+          <p>오늘부터 <b>12/31</b>까지 2차 크리스마스 프로모션. <b>헬로키티 토피 초콜릿</b>·<b>홀리데이 캐모마일 릴렉서</b>가 나오고, 굿즈는 <b>11/19 10종 · 12/2 12종</b> 순차 출시예요. <b>11/19~25</b> 신규 음료 2종을 주문하면 별 3개(사이렌오더·딜리버스)/2개(매장) 추가 적립.</p>
+          <div class="kw-wrap">
+            <span class="kw kw-main">스타벅스 헬로키티</span>
+            <span class="kw kw-sub">헬로키티 토피 초콜릿 후기</span>
+            <span class="kw kw-sub">홀리데이 캐모마일 릴렉서</span>
+            <span class="kw kw-sub">스타벅스 크리스마스 굿즈 가격</span>
+            <span class="kw kw-sub">윈터 e-프리퀀시</span>
+          </div>
+          <p class="tr-ex"><span>제목 예시</span>스타벅스 헬로키티 토피 초콜릿 솔직 후기 (당도·가격·별 3개 꿀팁)</p>
+          <p><b>공략</b> 첫날 저녁~다음 날 오전이 검색 정점. 빨간 리본 초콜릿 클로즈업 + 실제 컵 사진이 클릭을 만듭니다. <b>11/25 전</b>에 '별 적립 마지막 주' 리마인드 글을 한 편 더.</p>
+        </article>
+
+        <article class="card tr-pick">
+          <div class="tr-pick-top">
+            <span class="tr-no">TOP 3</span>
+            <span class="badge b-accent">시즌 초입 · 경쟁 적음</span>
+          </div>
+          <h3>대방어·굴, 겨울 제철 맛집</h3>
+          <p>방어 제철은 <b>11월~2월</b>, 기름이 오르는 정점은 <b>12~1월</b>이에요. 오늘부터 <b>11/22</b>까지 제주 모슬포 <b>최남단 방어축제</b>가 열리고, 굴도 11~2월이 제철이라 '제철 시작' 키워드가 이번 주부터 올라옵니다.</p>
+          <div class="kw-wrap">
+            <span class="kw kw-main">대방어 제철</span>
+            <span class="kw kw-sub">대방어 맛집</span>
+            <span class="kw kw-sub">방어회 가격</span>
+            <span class="kw kw-sub">굴 제철 시기</span>
+            <span class="kw kw-sub">석화 맛집</span>
+            <span class="kw kw-sub">겨울 국물 맛집</span>
+          </div>
+          <p class="tr-ex"><span>제목 예시</span>대방어 제철 시작🐟 11월에 먹어야 하는 이유 + 서울 대방어 맛집 3곳</p>
+          <p><b>공략</b> 11월엔 '제철 시작', 12월엔 '부위·가격'으로 2편 나눠 쓰면 같은 소재로 두 번 먹힙니다. 뱃살 클로즈업 + 가격 표 필수.</p>
+        </article>
+
+      </div>
+
+      <p class="foot-note">TOP 3는 <b>오늘 안에 발행할 수 있는 것</b>만 골랐어요. 아래 날짜별 표에 이번 주말·다음 주·12월까지 이어지는 <b>예약 발행 계획</b>을 날짜 순으로 담았습니다.</p>
+    </section>
+
+    <section>
+      <h2 class="sec-title">날짜별 트렌드 &amp; 검색 키워드 <span class="hint">11/19 ~ 12/25 · 날짜 순</span></h2>
+
+      <div class="card" style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:12px 16px;margin:0 0 12px;font-size:12px;color:var(--muted)">
+        <span><span class="badge b-ok">확정</span> 공식 공지·보도로 확인</span>
+        <span><span class="badge b-warning">예상</span> 발표 전 · 지난해 기준 예상</span>
+        <span><span class="badge b-gray">확인 필요</span> 보도마다 날짜가 다름</span>
+        <span><b style="color:var(--ink-soft);font-weight:650">모든 날짜·기간은 2026-11-19 확인값</b></span>
+      </div>
+
+      <!-- 11/19 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">11/19</span><span class="tr-dow">목</span></span>
+          <span class="badge b-today">오늘</span>
+          <span class="tr-sub">수능날 · 마켓 개막 · 헬로키티 첫날</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val">2027학년도 수능이 오늘 시행(성적 통지 <b>12/11</b>)돼 오전 검색이 수능·응원으로 몰렸고, 저녁부터는 <b>잠실 마켓 개막</b>과 <b>헬로키티 첫날</b>로 크리스마스 검색이 점화됩니다. 연말정산 미리보기는 <b>10/28~12/18</b> 홈택스에서 운영 중.</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">잠실 크리스마스 마켓</span><span class="kw kw-main">스타벅스 헬로키티</span><span class="kw kw-sub">수능 끝나고 갈 곳</span><span class="kw kw-sub">마켓 입장 예약</span><span class="kw kw-sub">대방어 제철</span><span class="kw kw-sub">연말정산 미리보기</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① 마켓 첫날 후기(동선·주차·포토존) ② 헬로키티 음료 후기 ③ <b>“수능날 서울은 한산해요”</b> — 시험 시간대 한적한 카페·맛집</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val">개막·첫날 콘텐츠는 <b>당일 밤 발행</b>이 가장 세요. 다음 날 아침에 후기 사진을 추가하고 '예약 방법' 소제목을 넣어 한 번 더 올리면 노출이 두 번 잡힙니다.</div></div>
+        </div>
+      </article>
+
+      <!-- 11/20 ~ 11/22 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">11/20~22</span><span class="tr-dow">금~일</span></span>
+          <span class="badge b-accent">이번 주말</span>
+          <span class="tr-sub">한파 절정 · 소설(11/22) · 무신사 개막</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val">서울 최저기온이 <b>11/21 -5도, 11/22 -5도</b>로 떨어지는 가장 추운 주말(예보). <b>11/22은 절기 소설(16:23)</b>이라 '첫눈' 검색이 붙고, 같은 날 <b>19시 무신사 겨울 블랙프라이데이(무진장)</b>가 시작됩니다(참여 브랜드 발표 기준 11/22~12/2, 종료일은 공식 공지 확인 필요). <b>포시즌스 서울</b>은 11/20부터 크리스마스 케이크 판매.</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">소설 뜻</span><span class="kw kw-main">무신사 무진장</span><span class="kw kw-main">주말 실내 데이트</span><span class="kw kw-sub">첫눈</span><span class="kw kw-sub">한파 옷차림</span><span class="kw kw-sub">크리스마스 케이크 예약</span><span class="kw kw-sub">서울 전시 추천</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① <b>“소설(小雪), 첫눈 내리는 절기”</b> 뜻·풍습 ② “이번 주말 -5도, 서울 실내 데이트 4곳” ③ “무진장 19시 오픈, 장바구니 미리 담는 법”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val">절기·날씨 글은 <b>당일 오전 6~9시</b> 발행(아침 검색이 가장 큼). 무신사는 시작 <b>2~3시간 전(16~18시)</b> 예열 글, 11/22 밤에 '첫 구매 후기'로 2차. 제목에 <b>날짜와 기온 숫자</b>를 넣으면 클릭률이 올라갑니다.</div></div>
+        </div>
+      </article>
+
+      <!-- 11/23 ~ 11/24 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">11/23~24</span><span class="tr-dow">월~화</span></span>
+          <span class="badge b-gray">다음 주 초</span>
+          <span class="tr-sub">비 예보 · 케이크 10% 할인 마감</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val">11/23은 <b>비 예보(강수확률 70%대)</b>, 11/24은 다시 영하권. <b>11/24까지</b> 파르나스 계열(그랜드 인터컨티넨탈·웨스틴) 케이크를 캐치테이블로 사전예약하면 <b>10% 할인</b>(메리고라운드·크리스마스 마차 제외).</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">크리스마스 케이크 할인</span><span class="kw kw-main">비 오는 날 실내</span><span class="kw kw-sub">파르나스 크리스마스 케이크</span><span class="kw kw-sub">케이크 예약 마감</span><span class="kw kw-sub">서울 전시 추천</span><span class="kw kw-sub">11월 마지막 주</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① “크리스마스 케이크 10% 할인, 11/24까지만” ② “비 오는 월요일, 서울 실내 전시 3곳”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val">'마감 임박' 글은 <b>마감 하루 전(11/23) 저녁</b>에 올려야 저장·공유가 붙어요. 가격·할인율·예약 링크를 첫 화면에 표로.</div></div>
+        </div>
+      </article>
+
+      <!-- 11/25 ~ 11/27 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">11/25~27</span><span class="tr-dow">수~금</span></span>
+          <span class="badge b-warning">세일 주간</span>
+          <span class="tr-sub">올리브데이 · 블랙프라이데이</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val"><b>11/25~27 올리브데이</b>(매달 25~27일). <b>11/27은 미국 블랙프라이데이</b>, <b>11/30 사이버먼데이</b>. 12월 올영세일은 <b>11/29~12/5</b>로 예상되지만 아직 <span class="badge b-warning">발표 전</span>이에요(2025년 11/30~12/6 기준).</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">올리브데이</span><span class="kw kw-main">블랙프라이데이 2026</span><span class="kw kw-sub">올영세일 12월</span><span class="kw kw-sub">블프 직구</span><span class="kw kw-sub">무신사 세일</span><span class="kw kw-sub">겨울 보습템</span><span class="kw kw-sub">뷰티 장바구니</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① “올리브데이에 담아둔 겨울 보습템 5” ② “2026 블프 직구 체크리스트(배송·관부가세)” ③ “건조한 11월, 20대 후반 피부 루틴”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val">세일은 <b>전날 21~23시 예열</b> + <b>첫날 아침 특가 업데이트</b>(본문 수정) 2회가 상위노출에 유리. 가격은 '예상'과 '확정'을 구분해 적어야 신뢰가 안 깎입니다.</div></div>
+        </div>
+      </article>
+
+      <!-- 11/28 ~ 11/30 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">11/28~30</span><span class="tr-dow">토~월</span></span>
+          <span class="badge b-danger">검색 몰리는 구간</span>
+          <span class="tr-sub">11월 마지막 주말 · 송년회 예약</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val">11월 마지막 주말 + <b>사이버먼데이(11/30)</b>. 12월 송년회 예약이 몰리는 시기로, 업계는 <b>12월 둘째~넷째 주 금·토 저녁</b>이 가장 빨리 찬다고 전합니다. 크리스마스 예약도 <b>4건 중 1건이 11월</b>에 이뤄질 만큼 앞당겨졌어요(캐치테이블).</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">송년회 맛집</span><span class="kw kw-main">12월 올영세일</span><span class="kw kw-sub">연말 모임 장소</span><span class="kw kw-sub">단체석 있는 맛집</span><span class="kw kw-sub">예약금 없는 곳</span><span class="kw kw-sub">11월 마지막 주말</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① “송년회 예약, 12월 들어가면 늦는 이유 (+단체석 맛집 5곳)” ② “예약금·보증인원 확인 체크리스트”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val"><b>11/29~30</b>에 올려야 12월 내내 검색 유입을 받아요. 단체 예약 팁은 정보성이라 체류시간이 길고, 12월 중순에 '후기'로 한 번 더 쓸 수 있습니다.</div></div>
+        </div>
+      </article>
+
+      <!-- 12/01 ~ 12/03 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">12/1~3</span><span class="tr-dow">화~목</span></span>
+          <span class="badge b-gray">12월 시작</span>
+          <span class="tr-sub">케이크 판매 시작 · 무신사 종료</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val"><b>12/1부터</b> 파르나스 계열 두 호텔 케이크 판매(12/1~12/31). <b>12/2 무신사 무진장 종료 예정</b>이고 같은 날 스타벅스 헬로키티 굿즈 <b>2차 12종</b> 출시. 신라·조선·롯데 호텔 케이크도 12월 초 출시 예정(11/18 보도 기준).</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">크리스마스 케이크 추천</span><span class="kw kw-main">12월 인사말</span><span class="kw kw-sub">호텔 케이크 가격 비교</span><span class="kw kw-sub">무신사 마지막 날</span><span class="kw kw-sub">헬로키티 굿즈 2차</span><span class="kw kw-sub">연말 캘린더</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① “호텔 크리스마스 케이크 가격 비교(워커힐 9.5만~파르나스 40만)” ② “12월 첫날, 연말 캘린더 정리”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val">가격 비교표 + 예약 링크 + 마감일 <b>3종 세트</b>가 체류시간을 만듭니다. 12월 첫 주는 '연말 계획' 검색이 몰리는 때예요.</div></div>
+        </div>
+      </article>
+
+      <!-- 12/04 ~ 12/06 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">12/4~6</span><span class="tr-dow">금~일</span></span>
+          <span class="badge b-accent">12월 첫 주말</span>
+          <span class="tr-sub">워커힐 할인 마감 · 12/11 개막 예열</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val">워커힐 케이크 네이버 예약 할인(골든 노엘 5%·드 노엘 10%)이 <b>12/4까지</b>. <b>12/7은 대설</b>. <b>12/11 개막</b>하는 광화문·청계천 야경 행사가 이 주말부터 검색되기 시작합니다.</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">12월 첫 주말 데이트</span><span class="kw kw-main">크리스마스 케이크 예약 마감</span><span class="kw kw-sub">대설 뜻</span><span class="kw kw-sub">광화문 크리스마스 마켓</span><span class="kw kw-sub">청계천 야경</span><span class="kw kw-sub">겨울 트리 명소</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① “12월 첫 주말, 트리 보러 갈 곳 3곳(실내 위주)” ② “케이크 예약 마감 임박 정리”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val">12/11 개막 행사는 <b>12/6~8 선발행</b>이 정답. 개막 당일에는 이미 상위에 올라 있어야 클릭이 옵니다. 야경 사진은 <b>17:30~19시</b>에 담아야 색이 살아요.</div></div>
+        </div>
+      </article>
+
+      <!-- 12/07 ~ 12/11 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">12/7~11</span><span class="tr-dow">월~금</span></span>
+          <span class="badge b-danger">개막 3종</span>
+          <span class="tr-sub">대설 · 빛초롱 · 광화문 마켓</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val"><b>12/7 대설</b>(11:53). <b>12/11</b>은 수능 성적 통지일이자 <b>서울빛초롱축제(12/11~1/31)</b>·<b>광화문 마켓(12/11~1/10)</b>·<b>서울라이트 광화문(12/11~1/3)</b>이 같은 날 개막하는 날.</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">빛초롱축제 2026</span><span class="kw kw-main">광화문 마켓</span><span class="kw kw-sub">서울라이트 광화문</span><span class="kw kw-sub">청계천 야경 코스</span><span class="kw kw-sub">겨울 야경 데이트</span><span class="kw kw-sub">대설 뜻</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① “12/11 한 번에 개막! 광화문→청계천 야경 코스” ② “겨울 야경 사진 잘 나오는 시간(17:30~19시)”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val">개막 <b>3~5일 전(12/6~8)</b>에 올려 경쟁 글보다 먼저 노출되고, 개막 당일 밤에 사진·후기로 <b>본문 수정</b>하면 상위가 유지됩니다.</div></div>
+        </div>
+      </article>
+
+      <!-- 12/22 ~ 12/25 -->
+      <article class="card tr-card">
+        <div class="tr-head">
+          <span class="tr-when"><span class="tr-day">12/22~25</span><span class="tr-dow">화~금</span></span>
+          <span class="badge b-accent">동지 · 크리스마스</span>
+          <span class="tr-sub">3연휴 · 한강 마켓 · 프러포즈</span>
+        </div>
+        <div class="tr-body">
+          <div class="tr-row"><span class="tr-label">핵심 트렌드</span><div class="tr-val"><b>12/22 동지</b>, <b>12/24~27 뚝섬한강공원 로맨틱한강 크리스마스 마켓</b>(13~21시, 12/24 18시 점등식). <b>12/25 크리스마스가 금요일</b>이라 3연휴입니다.</div></div>
+          <div class="tr-row"><span class="tr-label">키워드</span><div class="tr-val kw-wrap"><span class="kw kw-main">크리스마스 데이트</span><span class="kw kw-main">한강 크리스마스 마켓</span><span class="kw kw-sub">동지 팥죽</span><span class="kw kw-sub">크리스마스 코스 요리</span><span class="kw kw-sub">프러포즈 장소</span><span class="kw kw-sub">호텔 조식</span></div></div>
+          <div class="tr-row"><span class="tr-label">추천 글감</span><div class="tr-val">① “크리스마스 3연휴 데이트 코스(낮 실내·밤 야경)” ② “한강 크리스마스 마켓 12/24 개막” ③ <b>웨딩일기 각도</b> — “연말 프러포즈 준비 체크리스트”</div></div>
+          <div class="tr-row"><span class="tr-label">공략 팁</span><div class="tr-val"><b>12/20까지</b> 발행. 예약이 필요한 곳(호텔 다이닝)은 12월 초에 미리 잡고, 후기 글은 12/26에 올리면 연말 검색을 마지막까지 받습니다.</div></div>
+        </div>
+      </article>
+
+    </section>
+
+    <section>
+      <h2 class="sec-title">공략 공식 <span class="hint">언제 발행해야 검색에 걸리나</span></h2>
+
+      <div class="guide-grid">
+
+        <article class="card guide">
+          <h3><span class="badge b-danger">1</span> 시즌 이벤트는 3연타</h3>
+          <ol>
+            <li><b>D-5</b> 예약·동선·주차 '정보' 글</li>
+            <li><b>D-0</b> 개막 당일 후기·사진</li>
+            <li><b>종료 D-3</b> “마지막 날”·“아직 가능” 글</li>
+          </ol>
+          <p style="margin-top:6px">같은 장소로 3번 검색을 받는 구조예요. 첫 글에 사진을 넉넉히 넣어두면 2·3편은 그 사진을 재활용합니다.</p>
+        </article>
+
+        <article class="card guide">
+          <h3><span class="badge b-warning">2</span> 절기·날씨는 당일 아침</h3>
+          <p>“소설 뜻”, “첫눈”, “한파” 같은 키워드는 <b>당일 06~09시</b>에 검색이 몰려요. 전날 밤에 예약 발행해 두면 아침에 바로 걸립니다. 제목에 <b>날짜·기온 숫자</b>를 넣는 게 핵심.</p>
+        </article>
+
+        <article class="card guide">
+          <h3><span class="badge b-accent">3</span> 세일은 전날 밤 + 첫날 아침</h3>
+          <p>세일 시작 <b>전날 21~23시</b>에 장바구니·체크리스트 글을 올리고, 첫날 아침에 실제 특가로 <b>본문을 수정</b>하세요. 수정 이력이 쌓이면 같은 글이 계속 상위에 남습니다.</p>
+        </article>
+
+        <article class="card guide">
+          <h3><span class="badge b-ok">4</span> 맛집은 예약 오픈일이 기회</h3>
+          <p>크리스마스·송년회 예약은 <b>오픈 당일</b>이 검색 정점이에요. “예약 방법”으로 한 편, 방문 후 <b>D+1~2</b>에 후기로 한 편. 12월엔 2인 데이트보다 <b>단체·코스</b> 각도가 덜 붐빕니다.</p>
+        </article>
+
+        <article class="card guide">
+          <h3><span class="badge b-gray">5</span> 제목·본문 공식</h3>
+          <ol>
+            <li>제목: <b>지역·상황 + 핵심 키워드 + 후기/총정리/솔직</b></li>
+            <li>첫 3줄에 메인 키워드 2회, 결론 먼저</li>
+            <li>사진 15장 이상 · 지도 · 영업시간 · 예약 링크</li>
+            <li>썸네일에 <b>날짜·장소</b> 텍스트</li>
+          </ol>
+        </article>
+
+        <article class="card guide">
+          <h3><span class="badge b-accent">6</span> 웨딩일기 각도로 한 번 더</h3>
+          <p>같은 트렌드를 예비부부 시선으로 바꾸면 경쟁이 확 줄어요. <b>상견례·양가 식사</b>(12월 룸 있는 한정식·중식당, 11월 말 예약) · <b>연말 프러포즈</b>(12/24~25 호텔 다이닝·케이크 레터링) · <b>스냅·촬영</b>(한파엔 실내 온실·스튜디오) · <b>신혼여행</b>(블프·사이버먼데이 11/27~30에 항공·호텔).</p>
+        </article>
+
+      </div>
+
+      <p class="foot-note">
+        <b>표기 규칙</b> — 확정은 공식 공지·보도로 확인한 날짜, 예상은 발표 전이라 지난해 기준으로 잡은 날짜, 확인 필요는 보도마다 날짜가 갈리는 건이에요. 세일·행사 일정은 주최 측 사정으로 바뀔 수 있으니 <b>글 발행 전에 공식 페이지에서 한 번 더</b> 확인하세요.<br>
+        <b>날씨</b> — 서울 예보는 2026-11-19 21시 기준입니다.
+      </p>
+      <p class="foot-note" style="margin-top:2px"><a href="https://developer.apple.com/weatherkit/data-source-attribution/" target="_blank" rel="noopener noreferrer">&#xF8FF; Weather</a></p>
+    </section>
+
+    <section>
+      <h2 class="sec-title">출처 &amp; 확인 기준 <span class="hint">2026-11-19 확인</span></h2>
+      <div class="card">
+        <ul class="src-list">
+          <li><b>수능</b> — 2027학년도 수능 2026.11.19 시행·성적 통지 2026.12.11 (교육부·한국교육과정평가원 suneung.re.kr)</li>
+          <li><b>절기</b> — 2026년 소설 11/22 16:23, 대설 12/7 11:53, 동지 12/22 (한국천문연구원 2026 월력요항)</li>
+          <li><b>블랙프라이데이</b> — 2026.11.27(금), 사이버먼데이 11.30(월) (timeanddate · blackfridays.co.kr)</li>
+          <li><b>무신사 무진장</b> — 11/22 19시 시작, 11/22~12/2 (참여 브랜드 보도 기준 · 공식 공지 전)</li>
+          <li><b>올리브영</b> — 올영 블프 11/1~7 종료, 올리브데이 11/25~27, 12월 올영세일 11/29~12/5 예상(발표 전)</li>
+          <li><b>크리스마스 케이크</b> — 워커힐·JW메리어트·파라다이스·포시즌스·파르나스 출시·할인 일정 (연합뉴스 11/18, 파르나스 보도 11/18, 각 호텔 공식)</li>
+          <li><b>트리·마켓</b> — 롯데 잠실 마켓 11/19~1/3, 서울광장 성탄트리 11/16 점등, 빛초롱 12/11~1/31, 광화문 마켓 12/11~1/10, 한강 마켓 12/24~27 (서울 공식 관광정보·서울시 문화포털·국제뉴스 11/17)</li>
+          <li><b>예약 경쟁</b> — 크리스마스 예약 4건 중 1건이 11월, 12월 금·토 평균 2.8배 (캐치테이블 트렌드 11/6 · 매일경제 11/14), 송년회 예약 집중 (공감신문 11/9)</li>
+          <li><b>제철</b> — 방어 11~2월(정점 12~1월), 최남단 방어축제 11/19~22, 굴 11~2월</li>
+          <li><b>연말정산</b> — 미리보기 2026.10.28~12.18 (국세청 홈택스)</li>
+        </ul>
+      </div>
+      <p class="foot-note">광화문광장 겨울 마켓은 <b>12/4 개장</b> 보도와 공식 관광정보의 <b>12/11</b> 일정이 갈려요. 방문 전 공식 페이지에서 날짜를 확인하고, 글에는 <b>“12월 초·중순 개장”</b>처럼 여유 있게 적는 편이 안전합니다.</p>
+    </section>
+
+  </div>
+
   <footer>
     <p>2026-11-19 06시 기준 · 리뷰노트 · 레뷰 · 디너의여왕 마이페이지에서 직접 확인한 값으로 정리했습니다.</p>
     <p>플랫폼 사정에 따라 마감일·발표일이 바뀔 수 있어요. 마감이 임박한 건은 신청·등록 전에 사이트에서 한 번 더 확인하는 게 좋습니다.</p>
+    <p>블로그 트렌드 탭은 2026-11-19 21시 확인값이에요. '예상' 표시가 붙은 일정은 발표 전이라 날짜가 바뀔 수 있습니다.</p>
   </footer>
 
 </main>
